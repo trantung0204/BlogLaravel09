@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Socialite;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Auth;
 class GoogleController extends Controller
 {
     /**
@@ -48,14 +49,16 @@ class GoogleController extends Controller
         $data['email']=$user->getEmail();
         $data['password']=Hash::make($user->token);
 
-        if (isset(User::find($data['id']))) {
-            
+        $u=User::where('email',$data['email'])->first();
+        if (isset($u)) {
+            Auth::login($u);
         }else{
-
+            $u=User::create($data);
+            Auth::login($u);
         }
-    	$a=User::create($data);
+    	
     	//Auth::gurad('admin')->login($a);
-        Auth::login($a);
+        
     	// Auth::loginUsingId($a->id);
     	return redirect()->route('posts.index');
     }
