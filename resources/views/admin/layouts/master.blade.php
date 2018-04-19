@@ -391,6 +391,11 @@
           </a>
         </li>
         <li>
+          <a href="/admin/guests">
+            <i class="fa fa-users"></i> <span>Guests</span>
+          </a>
+        </li>
+        <li>
           <a href="pages/widgets.html">
             <i class="fa fa-tags"></i> <span>Tags</span>
           </a>
@@ -1312,6 +1317,7 @@
     $('#post-table').DataTable()
     $('#category-table').DataTable()
     $('#user-table').DataTable()
+    $('#guest-table').DataTable()
     $('#example2').DataTable({
       'paging'      : true,
       'lengthChange': false,

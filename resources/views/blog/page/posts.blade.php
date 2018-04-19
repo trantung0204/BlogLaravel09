@@ -106,8 +106,8 @@
                             <li><a href="blog-3-columns.html">Blog 3 Columns</a></li>                                                                      
                         </ul>                
                     </li>  --}}
-                    <li><a href="blog/login">Sign In</a></li>
-                    <li><a href="blog/register">Register</a></li>
+                    <li><a href="{{ asset('blog/login') }}">Sign In</a></li>
+                    <li><a href="{{ asset('blog/register') }}">Register</a></li>
                     <li>
                       <a href="{{ route('logout') }}"
                          onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-xs btn-default btn-flat">Sign out</a>

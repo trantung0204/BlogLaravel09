@@ -56,9 +56,9 @@ class Guest extends Authenticatable
     }
     public static function updateData($id,$data)
     {
-        $user= Guest::find($id);
-        $user->update($data);
-        return $user;
+        $guest= Guest::find($id);
+        $guest->update($data);
+        return $guest;
     }
     protected $hidden = [
         'password', 'remember_token',

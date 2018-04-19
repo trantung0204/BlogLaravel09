@@ -76,7 +76,7 @@ function slug(title)
 				success: function (response) {
 					$('#add').modal('hide');
 					toastr.success('Thành công!');
-					$('#table-body').append('<tr id="user-row-'+response.id+'"><td>'+response.id+'</td><td id="user-name-'+response.id+'">'+response.name+'</td> <td>'+response.created_at+'</td> <td>'+response.updated_at+'</td> <td><button type="button" class="btn btn-xs btn-info" data-id="'+response.id+'"><i class="fa fa-plus" aria-hidden="true"></i></button> <button type="button" class="btn btn-xs btn-warning"  data-url="http://tungdeptrai.org/admin/users/'+response.id+'"><i class="fa fa-pencil" aria-hidden="true"></i></button> <button type="button" class="btn btn-xs btn-danger" data-id="'+response.id+'" data-url="http://tungdeptrai.org/admin/users/'+response.id+'"><i class="fa fa-trash" aria-hidden="true"></i></button></td> </tr>');
+					$('#table-body').append('<tr id="guest-row-'+response.id+'"><td>'+response.id+'</td><td id="guest-name-'+response.id+'">'+response.name+'</td><td id="guest-email-'+response.id+'">'+response.email+'</td> <td>'+response.created_at+'</td> <td>'+response.updated_at+'</td> <td><button type="button" class="btn btn-xs btn-info" data-id="'+response.id+'"><i class="fa fa-plus" aria-hidden="true"></i></button> <button type="button" class="btn btn-xs btn-warning"  data-url="http://tungdeptrai.org/admin/guests/'+response.id+'"><i class="fa fa-pencil" aria-hidden="true"></i></button> <button type="button" class="btn btn-xs btn-danger" data-id="'+response.id+'" data-url="http://tungdeptrai.org/admin/guests/'+response.id+'"><i class="fa fa-trash" aria-hidden="true"></i></button></td> </tr>');
 				},
 				error: function (error) {
 					
@@ -92,16 +92,16 @@ function slug(title)
 				type: 'put',
 				url: url,
 				data: {
-					name: $('#user-edit-name').val(),
-					email: $('#user-edit-email').val(),
-					password: $('#user-edit-password').val(),
+					name: $('#guest-edit-name').val(),
+					email: $('#guest-edit-email').val(),
+					password: $('#guest-edit-password').val(),
 				},
 				success: function (response) {
 					//console.log(response);
 					$('#edit').modal('hide');
-					$('#user-edit-password').val("");
-					$('#user-name-'+id).text(response.name);
-					$('#user-email-'+id).text(response.email);
+					$('#guest-edit-password').val("");
+					$('#guest-name-'+id).text(response.name);
+					$('#guest-email-'+id).text(response.email);
 					//$('#product-price-'+id).text(response.data.price+" $");
 					toastr.success('Đã lưu thay đổi');
 					//toastr.success('Thành công!');
@@ -141,9 +141,9 @@ function slug(title)
 
 				success: function (response) {
 
-					$('#user-edit-name').val(response.name);
-					$('#user-edit-email').val(response.email)
-					$('#edit-submit').attr("data-url", "/admin/users/"+response.id);
+					$('#guest-edit-name').val(response.name);
+					$('#guest-edit-email').val(response.email)
+					$('#edit-submit').attr("data-url", "/admin/guests/"+response.id);
 					$('#edit-submit').attr("data-id",response.id);
 				},
 				error: function (error) {
@@ -191,7 +191,7 @@ function slug(title)
 						success: function (response) {
 							//console.log(response);
 							//toastr.error('Đã xóa sản phẩm');
-							$('#user-row-'+id).hide();
+							$('#guest-row-'+id).hide();
 						},
 						error: function (error) {
 							

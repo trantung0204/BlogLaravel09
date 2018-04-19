@@ -10,6 +10,7 @@ use App\Product;
 			Route::resource('posts','admin\PostController');
 			Route::resource('categories','admin\CategoryController');
 			Route::resource('users','admin\UserController');
+			Route::resource('guests','admin\GuestController');
 			Route::get('categories/getposts/{categories}', 'admin\CategoryController@getposts')->name('categories.getposts');
 		});
 	});
