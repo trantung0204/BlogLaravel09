@@ -30,42 +30,42 @@ class scrapeDantri extends Command
      */
     
     protected $categories=[
-        // [
-        //     'link'=>'xa-hoi.htm',
-        //     'slug'=>'xa-hoi',
-        // ],
+        [
+            'link'=>'xa-hoi.htm',
+            'slug'=>'xa-hoi',
+        ],
         [
             'link'=>'the-gioi.htm',
             'slug'=>'the-gioi',
         ],
-        // [
-        //     'link'=>'the-thao.htm',
-        //     'slug'=>'the-thao',
-        // ],
+        [
+            'link'=>'the-thao.htm',
+            'slug'=>'the-thao',
+        ],
         // [
         //     'link'=>'giao-duc-khuyen-hoc.htm',
         //     'slug'=>'giao-duc-khuyen-hoc',
         // ],
-        // [
-        //     'link'=>'kinh-doanh.htm',
-        //     'slug'=>'kinh-doanh',
-        // ],
-        // [
-        //     'link'=>'suc-khoe.htm',
-        //     'slug'=>'suc-khoe',
-        // ],
-        // [
-        //     'link'=>'suc-manh-so.htm',
-        //     'slug'=>'suc-manh-so',
-        // ],
-        // [
-        //     'link'=>'van-hoa.htm',
-        //     'slug'=>'van-hoa',
-        // ],
-        // [
-        //     'link'=>'phap-luat.htm',
-        //     'slug'=>'phap-luat',
-        // ],
+        [
+            'link'=>'kinh-doanh.htm',
+            'slug'=>'kinh-doanh',
+        ],
+        [
+            'link'=>'suc-khoe.htm',
+            'slug'=>'suc-khoe',
+        ],
+        [
+            'link'=>'suc-manh-so.htm',
+            'slug'=>'suc-manh-so',
+        ],
+        [
+            'link'=>'van-hoa.htm',
+            'slug'=>'van-hoa',
+        ],
+        [
+            'link'=>'phap-luat.htm',
+            'slug'=>'phap-luat',
+        ],
     ];
     public function __construct()
     {
@@ -136,7 +136,12 @@ class scrapeDantri extends Command
             'user_id' => 5,
             'category_id' => $category_id,
         ];
-        Post::create($data);
+        $p=Post::where('slug',$data['slug'])->first();
+        if (!isset($p)) {
+            Post::create($data);
+        }else{
+            print('next \n');
+        }
         // print($title."\n");
         // print($thumbnail."\n");
         // print($slug."\n");

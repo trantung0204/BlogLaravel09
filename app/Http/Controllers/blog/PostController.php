@@ -12,7 +12,7 @@ class PostController extends Controller
 {
     public function blogHome()
     {
-        $posts=Post::orderBy('id', 'desc')->paginate(15);
+        $posts=Post::orderBy('id', 'desc')->paginate(8);
         $new_posts=Post::orderBy('id', 'asc')->paginate(4);
         $categories=Category::all();
         //dd($products);

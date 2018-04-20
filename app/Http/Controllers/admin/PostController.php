@@ -60,7 +60,7 @@ class PostController extends Controller
                 'slug'          => 'required',
                 'thumbnail'     => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
-            $imageName= 'http://tungdeptrai.stag/storage/app/images/posts/'.time().'.'.$request->thumbnail->getClientOriginalExtension();
+            $imageName= 'http://tungdeptrai.org/storage/app/images/posts/'.time().'.'.$request->thumbnail->getClientOriginalExtension();
 
             $request->thumbnail->move(public_path('storage/app/images/posts'), $imageName);
         }else{
@@ -69,7 +69,7 @@ class PostController extends Controller
                 'description'   => 'required',
                 'content'       => 'required',
                 'category_id'   => 'required',
-                'user_id'       => 'required',
+                //'user_id'       => 'required',
                 'slug'          => 'required',
             ]);
                 $imageName='/images/posts/userDefault.png';
@@ -121,15 +121,60 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $result = Post::updateData($id,$request);
-        if($result){
-            $post= Post::find($id);
-            return response()->json([
-                'data'=>$post
-            ], 200);
-        }else{
-            return response()->json( 500);
-        }
+        $data=$request->all();
+
+        return response()->json($data);
+        // if ($request->hasFile('thumbnail')) {
+        //     $request->validate([
+        //         'title'         => 'required',
+        //         'description'   => 'required',
+        //         'content'       => 'required',
+        //         'category_id'   => 'required',
+        //         /*'user_id'       => 'required',*/
+        //         'slug'          => 'required',
+        //         'thumbnail'     => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        //     ]);
+        //     $imageName= 'http://tungdeptrai.org/storage/app/images/posts/'.time().'.'.$request->thumbnail->getClientOriginalExtension();
+
+        //     $request->thumbnail->move(public_path('storage/app/images/posts'), $imageName);
+        // }else{
+        //     $request->validate([
+        //         'title'         => 'required',
+        //         'description'   => 'required',
+        //         'content'       => 'required',
+        //         'category_id'   => 'required',
+        //         //'user_id'       => 'required',
+        //         'slug'          => 'required',
+        //     ]);
+        //         $po=Post::where('id',$id)->first();
+        //         $imageName=$po->thumbnail;
+        // }
+        
+        // $data=$request->all();
+        // //$data['user_id'] = Auth::user()->id;
+        // unset($data['thumbnail']);
+        // //unset($data['tags']);
+        // $data['thumbnail']=$imageName;
+        // $data['user_id'] = Auth::user()->id;
+        // $result= Post::updateData($id,$data->only(['title','thumbnail','description','content','slug','user_id','category_id']));
+        // if($result){
+        //     $post= Post::find($id);
+        //     return response()->json([
+        //         'data'=>$post
+        //     ], 200);
+        // }else{
+        //     return response()->json( 500);
+        // }
+
+        // $result = Post::updateData($id,$request);
+        // if($result){
+        //     $post= Post::find($id);
+        //     return response()->json([
+        //         'data'=>$post
+        //     ], 200);
+        // }else{
+        //     return response()->json( 500);
+        // }
     }
 
     /**

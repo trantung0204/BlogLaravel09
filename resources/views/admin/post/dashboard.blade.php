@@ -119,7 +119,7 @@
           <h4 class="modal-title">Sửa bài viết</h4>
         </div>
         <div class="modal-body">
-        <form id="add-new"  method="POST" role="form" >
+        <form id="edit-form"  method="POST" role="form" >
           {{csrf_field()}}<!-- sinh token -->
           <div class="form-group">
             <label for="title">Title</label>
@@ -127,7 +127,7 @@
           </div>
           <div class="form-group">
             <label for="thumbnail">Thumbnail</label>
-            <input name="thumbnail" type="file" id="post-edit-thumbnail" class="form-control" placeholder="Input field" required="true" value="">
+            <input name="thumbnail" type="file" id="post-edit-thumbnail" class="form-control" placeholder="Input field" value="">
           </div>
           <div class="form-group">
             <label for="description">Description</label>
@@ -150,7 +150,7 @@
           
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button id="edit-submit"  type="submit" class="btn btn-primary">Submit</button>
         </form>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>

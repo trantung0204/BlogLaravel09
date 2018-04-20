@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Tada & Blog - Post Full Width</title>
+    <title>{{$post->title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <link rel="shortcut icon" type="image/png" href="{{ asset('blog_assets/img/favicon.png') }}"/>
     <!-- STYLES -->
@@ -28,6 +28,14 @@
 </head>
 
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.12&appId=1295987843866278&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 
     <!-- *****************************************************************
@@ -274,7 +282,7 @@
                 
                 
                 <!-- RELATED POSTS -->
-                <div class="related-posts">
+                <div style="padding-bottom: 50px;" class="related-posts">
                         <h2>Related Article</h2>
                         <div class="related-item-container">
                             <div class="related-item">
@@ -324,9 +332,10 @@
                         </div>
                   </div>      
                         
-                        
+                
+            <div style="padding-top: 100px;" class="fb-comments" data-href="http://tungdeptrai.org/blog/home" data-width="100%" data-numposts="5"></div>     
                   <!-- COMMENTS -->      
-                  <div class="comments">
+                  {{-- <div class="comments">
                             <h3>3 Comments</h3>
                             <div class="comments-list">
                                 <div class="main-comment">
@@ -365,7 +374,7 @@
                                 </div>
                             </div>
                         
-                </div>                                  
+                </div>  --}}                                 
                 
                 
                 <!-- COMMENT FORM -->

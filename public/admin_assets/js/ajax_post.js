@@ -85,25 +85,38 @@ function slug(title)
 			e.preventDefault();
 			var url=$('#edit-submit').data('url');
 			var id=$('#edit-submit').data('id');
+			var thumbnail = $('#post-edit-thumbnail').get(0).files[0];
+			var content= CKEDITOR.instances.post_edit_content.getData();
+			var newPostEdit = new FormData();
+			newPostEdit.append('title',$('#post-edit-title').val());
+	        newPostEdit.append('thumbnail',thumbnail);
+	        newPostEdit.append('description',$('#post-edit-description').val());
+	        newPostEdit.append('content',content);
+	        newPostEdit.append('slug',slug($('#post-edit-title').val()));
+	        //newPostEdit.append('user_id',$('#user_id').val());
+	        newPostEdit.append('category_id',$('#post-edit-category_id').val());
+	        //newPostEdit.append('tags',$('#tags').val());
+	        console.log(newPostEdit.title);
 			$.ajax({
 				type: 'put',
 				url: url,
-				data: {
-					name: $('#product-edit-name').val(),
-					price: $('#product-edit-price').val()
-				},
+				data:newPostEdit,
+	            dataType:'json',
+	            async:false,
+	            processData: false,
+	            contentType: false,
 				success: function (response) {
-					//console.log(response);
+					console.log(response);
 					$('#edit').modal('hide');
-					
-					$('#product-name-'+id).text(response.data.name);
-					$('#product-price-'+id).text(response.data.price+" $");
-					toastr.success('Đã lưu thay đổi');
-					//toastr.success('Thành công!');
-					$('#table-body').append('<tr><td>'+response.id+'</td><td>'+response.name+'</td> <td>'+response.price+' $</td> <td>'+response.created_at+'</td> <td>'+response.updated_at+'</td> <td> <button type="button" class="btn btn-xs btn-info" data-id="'+response.id+'">Show</button> <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" href="#edit-'+response.id+'">Edit</button>  </td> </tr>');
+					toastr.success('Thành công!');
+					console.log(response.title);
+					console.log(response.thumbnail);
+					console.log(response.description);
+					//$('#table-body').prepend('<tr id="post-row-'+response.id+'"><td>'+response.id+'</td><td><img style="width: 70px;" class="center-block img-rounded img-thumbnail img-responsive" src="'+response.thumbnail+'" alt=""></td><td id="post-title-'+response.id+'">'+response.title+'</td><td>just now</td><td>public</td><td>'+response.category_id+'</td><td>'+response.user_id+'</td><td><button type="button" class="btn btn-xs btn-info" data-url="tungdeptrai.org/adimn/post/'+response.id+'"><i class="fa fa-eye" aria-hidden="true"></i></button><button type="button" class="btn btn-xs btn-warning" data-url="tungdeptrai.org/posts/'+response.id+'"><i class="fa fa-pencil" aria-hidden="true"></i></button><button type="button" class="btn btn-xs btn-danger" data-id="'+response.id+'" data-url="tungdeptrai.org/posts/'+response.id+'"><i class="fa fa-trash" aria-hidden="true"></i></button></td></tr>');
 				},
-				error: function (error) {
-					
+				error: function (xhr, ajaxOptions, thrownError) {
+		            console.log(xhr);
+		            toastr.error(xhr.responseJSON.message);
 				}
 			})
 		});
@@ -138,13 +151,13 @@ function slug(title)
 				url: url,
 
 				success: function (response) {
-					$('#user-edit-title').val(response.title);
+					$('#post-edit-title').val(response.title);
 
-					CKEDITOR.instances.post_edit_content.getData(response.content);
-					$('#user-edit-description').val(response.description);
-					$('#user-edit-category_id').val(response.category_id);
+					CKEDITOR.instances.post_edit_content.setData(response.content);
+					$('#post-edit-description').val(response.description);
+					$('#post-edit-category_id').val(response.category_id);
 					//$('#edit-submit').data("id", response.id);
-					$('#edit-submit').attr("data-url", "/admin/products/"+response.id);
+					$('#edit-submit').attr("data-url", "/admin/posts/"+response.id);
 					$('#edit-submit').attr("data-id",response.id);
 				},
 				error: function (error) {
